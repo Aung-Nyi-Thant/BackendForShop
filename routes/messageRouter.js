@@ -1,0 +1,12 @@
+var express = require('express');
+var router = express.Router();
+let messages = require('../controllers/MessageController');
+let messsagess = require('../services/MessageService')
+let path = require('path');
+
+
+router.get('/getAllMessages', messages.getAllMessage);
+router.post('/', messages.newMessage)
+router.delete('/:MessageId', messages.deleteMessage)
+router.get('/sendCode', messages.sendCodeMessage)
+module.exports = router
