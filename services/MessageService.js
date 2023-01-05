@@ -18,6 +18,12 @@ const DeleteMessage = async(MessageId) => {
     const DeleteMessage = Message.findByIdAndDelete(MessageId)
     return DeleteMessage
 }
+const UpdateMessage = async(Message, MessageId) => {
+    console.log("Message", Message)
+    let newMessage = Message.findByIdAndUpdate(MessageId, Message, { new: true })
+    console.log("This is new message", newMessage)
+    return newMessage;
+}
 const sendCodeMessage = async() => {
     var nodemailer = require('nodemailer');
     var transporter = nodemailer.createTransport({
@@ -48,5 +54,6 @@ module.exports = {
     GetAllMessage,
     newMessage,
     DeleteMessage,
-    sendCodeMessage
+    sendCodeMessage,
+    UpdateMessage
 }

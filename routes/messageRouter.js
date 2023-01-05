@@ -8,5 +8,6 @@ let path = require('path');
 router.get('/getAllMessages', messages.getAllMessage);
 router.post('/', messages.newMessage)
 router.delete('/:MessageId', messages.deleteMessage)
+router.patch('/:MessageId', messages.UpdateMessage_)
 router.get('/sendCode', messages.sendCodeMessage)
 module.exports = router

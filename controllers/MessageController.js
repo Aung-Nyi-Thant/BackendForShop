@@ -45,9 +45,24 @@ const sendCodeMessage = async function(req, res, next) {
         await res.status(400).json({ message: err })
     }
 }
+const UpdateMessage_ = async function(req, res, next) {
+    console.log("UpdateMessage")
+    let MessageId = req.params['MessageId'];
+    let Message = req.body;
+    console.log("Message", Message)
+    try {
+        const updateMessage = await MessagesService.UpdateMessage(MessageId, Message);
+        if (!updateMessage) throw Error('Cannot update Message');
+        await res.status(200).json(updateMessage);
+
+    } catch (err) {
+        await res.status(400).json({ message: err })
+    }
+};
 module.exports = {
     getAllMessage,
     newMessage,
     deleteMessage,
-    sendCodeMessage
+    sendCodeMessage,
+    UpdateMessage_
 }

@@ -73,7 +73,6 @@ const updateUser = async function(req, res, next) {
         await res.status(400).json({ message: err })
     }
 };
-
 const RemoveAccount = async function(req, res, next) {
     userId = req.params["UserId"]
     console.log(userId)
