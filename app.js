@@ -20,6 +20,7 @@ let MessageRouter = require('./routes/messageRouter')
 let CartsRouter = require('./routes/Cart')
 let ImageRouter = require('./routes/ImageRouter')
 let PayMentRouter = require('./routes/PayMentRouter')
+let PostRouter = require('./routes/PosterRouter')
 var app = express();
 
 // view engine setup
@@ -57,6 +58,7 @@ app.use('/api/messages', MessageRouter)
 app.use('/api/carts', CartsRouter)
 app.use('/api/image', ImageRouter)
 app.use('/api/payMent', PayMentRouter)
+app.use('/api/poster', PostRouter)
 
 app.use('/test', (req, res, next) => {
     res.send('Test router');

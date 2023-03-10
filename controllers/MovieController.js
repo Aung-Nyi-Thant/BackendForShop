@@ -1,6 +1,5 @@
 let movieService = require('../services/MovieService');
 const getAllMovie = async function (req, res, next) {
-    console.log('Movie controller user ',req.user);
     try {
         const movies = await movieService.getAllMovie();
         if(!movies) throw Error('No movies');
@@ -10,6 +9,42 @@ const getAllMovie = async function (req, res, next) {
     {
         await res.status(400).json({message: err})
     }
+}
+const getMovieByPage = async function(req, res, nextt) {
+    try {
+        const MovieList = [];
+        let movieCount = 8;
+        let getMovieCount = 0 ;
+        let getMovieById = 0;
+        let pageId = req.params['PageId'];
+        const movies = await movieService.getAllMovie();
+        if(pageId > 0){
+            getMovieById = movieCount * pageId ;
+            getMovieCount = getMovieById + 8 ;
+            for(let i = 0 ;i<movies.length;i++){
+                if(i >= getMovieById){
+                    if(i == getMovieCount){
+                        break;
+                    }
+                    MovieList.push(movies[i])
+                }
+            }
+            console.log("MovieList ", MovieList)
+        }
+        if(pageId == 0 ){
+            for(let i = 0 ; i<movies.length;i++){
+                MovieList.push(movies[i])
+                if(i == 7){
+                    break
+                }
+            }
+        }
+        await res.status(200).json(MovieList);
+    }catch(err)
+    {
+        await res.status(404).json({message: err})
+    }
+
 }
 const getMovieById = async function (req,res,next)
 {
@@ -87,4 +122,5 @@ module.exports = {
     newMovie,
     updateMovie,
     deleteMovie,
+    getMovieByPage
 }
