@@ -34,12 +34,31 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect(db, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    }).then(() => console.log('MongoDB connected!'))
-    .catch(err => console.log(err));
+let PORT = process.env.PORT || 3006;
 
+mongoose.set('strictQuery', false);
+
+
+const connectDB = async ()=>{
+    try{
+        const conn = await mongoose.connect("mongodb+srv://thantaungnyi:Accmobile001@cluster0.wbtexqy.mongodb.net/test");
+        console.log(`MongoDB connect ${conn.connection.host}`);
+    }
+    catch(err){
+        console.log(err);
+        process.exit(1)
+    }
+}
+// mongoose.connect(db, {
+//         useNewUrlParser: true,
+//         useUnifiedTopology: true,
+//     }).then(() => console.log('MongoDB connected!'))
+//     .catch(err => console.log(err));
+connectDB().then(()=>{
+    app.listen(PORT, ()=>{
+        console.log(`Listening on port ${PORT}`)
+    })
+})
 
 app.use('/', indexRouter);
 /*
