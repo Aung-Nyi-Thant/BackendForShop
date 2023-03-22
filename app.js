@@ -34,7 +34,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-let PORT = process.env.PORT || 3006;
+let PORT = process.env.PORT || 3001;
 
 mongoose.set('strictQuery', false);
 
