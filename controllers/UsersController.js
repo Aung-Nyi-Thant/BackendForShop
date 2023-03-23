@@ -20,6 +20,7 @@ const registerUser = async function(req, res, next) {
         let user = await userService.register(userName, password, email, age, money, totalMoney, type);
         let payload = { id: user._id };
         const token = jwt.sign(payload, config.TOKEN_SECRET);
+        res.send("Username",userName,"email",email)
         res.status(200).send({ token });
     } catch (err) {
         console.log(err)
