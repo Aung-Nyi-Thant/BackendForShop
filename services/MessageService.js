@@ -36,6 +36,7 @@ const SerchMessage = async (SendId, recivedID)=>{
         }
     })
     console.log("Messages",Messages)
+    return Messages
 }
 const sendCodeMessage = async() => {
     var nodemailer = require('nodemailer');

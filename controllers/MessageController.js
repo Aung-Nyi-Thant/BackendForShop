@@ -29,6 +29,7 @@ const serchMessage = async function(req, res, next){
     try{
         const serch_Message = await MessagesService.SerchMessage(SendId,recivedID);
         if (!serchMessage) throw Error('Cannot serch Message');
+        
         await res.status(200).json(serch_Message)
     }
     catch(err){
