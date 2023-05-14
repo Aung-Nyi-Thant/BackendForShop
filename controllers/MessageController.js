@@ -23,6 +23,18 @@ const newMessage = async function(req, res, next) {
         await res.status(400).json({ message: err })
     }
 }
+const serchMessage = async function(req, res, next){
+    let SendId = req.params['SendId'];
+    let recivedID = req.params['recivedID'];
+    try{
+        const serch_Message = await MessagesService.SerchMessage(SendId,recivedID);
+        if (!serchMessage) throw Error('Cannot serch Message');
+        await res.status(200).json(serch_Message)
+    }
+    catch(err){
+        await res.status(400).json({ message: err })
+    }
+}
 const deleteMessage = async function(req, res, next) {
     console.log("Delete Message")
     let MessageId = req.params['MessageId'];
@@ -64,5 +76,6 @@ module.exports = {
     newMessage,
     deleteMessage,
     sendCodeMessage,
-    UpdateMessage_
+    UpdateMessage_,
+    serchMessage
 }

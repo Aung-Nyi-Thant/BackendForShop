@@ -24,6 +24,19 @@ const UpdateMessage = async(Message, MessageId) => {
     console.log("This is new message", newMessage)
     return newMessage;
 }
+const SerchMessage = async (SendId, recivedID)=>{
+    console.log(SendId)
+    console.log(recivedID)
+    let Messages = await Message.find({
+        FoodName:{
+            $regex:recivedID
+        },
+        count:{
+            $regex:SendId
+        }
+    })
+    console.log("Messages",Messages)
+}
 const sendCodeMessage = async() => {
     var nodemailer = require('nodemailer');
     var transporter = nodemailer.createTransport({
@@ -55,5 +68,6 @@ module.exports = {
     newMessage,
     DeleteMessage,
     sendCodeMessage,
-    UpdateMessage
+    UpdateMessage,
+    SerchMessage
 }

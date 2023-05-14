@@ -10,4 +10,5 @@ router.post('/', messages.newMessage)
 router.delete('/:MessageId', messages.deleteMessage)
 router.patch('/:MessageId', messages.UpdateMessage_)
 router.get('/sendCode', messages.sendCodeMessage)
+router.get('/:SendId/:recivedID',messages.serchMessage)
 module.exports = router
