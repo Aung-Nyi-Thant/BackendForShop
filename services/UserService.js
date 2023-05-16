@@ -7,16 +7,16 @@ const router = express.Router();
 const User = require('../model/user');
 
 const register = async(userName, password, email, age, money, totalMoney, type) => {
+    let passwordEndCode = bcrypt.hashSync(password, 10)
     let user = new User({
         username: userName,
-        password: password,
+        password: passwordEndCode,
         email: email,
         age: age,
         money: money,
         totalMoney: totalMoney,
         type_: type
     });
-    console.log(user)
     return user.save();
 
 }
@@ -25,12 +25,9 @@ const login = async(userName, password) => {
     const filter = {
         username: userName
     };
-    console.log('Filter ', filter);
     const user = await User.findOne(filter);
     if (user) {
-        //console.log('Username ',userName, " Password ",user.password);
         const validPass = await bcrypt.compare(password, user.password);
-        console.log(password)
         if (validPass) {
             return user;
         } else {
@@ -39,11 +36,8 @@ const login = async(userName, password) => {
     }
     throw Error("Invalid user or password");;
 };
-const updateUser = async(UserId, user) => {
-    console.log("User is", User)
-    console.log("User id is", UserId)
+const updateUser = async(UserId, user) => {    
     const newUser = await User.findByIdAndUpdate(UserId, user, { new: true });
-    console.log("This is new user", newUser)
     return newUser;
 }
 const getUserById = (userId) => {
