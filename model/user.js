@@ -12,7 +12,7 @@ const UserSchema = new Schema({
     },
     type_: {
         type: "String",
-        required: true
+        required: false
     },
     email: {
         type: 'String',
@@ -20,15 +20,15 @@ const UserSchema = new Schema({
     },
     age: {
         type: "String",
-        require: true
+        require: false
     },
     money: {
         type: 'Number',
-        require: true
+        require: false
     },
     totalMoney: {
         type: 'String',
-        require: true
+        require: false
     },
 });
 module.exports = mongoose.model('User', UserSchema)
