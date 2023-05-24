@@ -21,6 +21,7 @@ let CartsRouter = require('./routes/Cart')
 let ImageRouter = require('./routes/ImageRouter')
 let PayMentRouter = require('./routes/PayMentRouter')
 let PostRouter = require('./routes/PosterRouter')
+let BlogRouter = require('./routes/BlogRouter')
 var app = express();
 
 // view engine setup
@@ -33,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static('public'));
 
 let PORT = process.env.PORT || 3001;
 
@@ -78,6 +80,7 @@ app.use('/api/carts', CartsRouter)
 app.use('/api/image', ImageRouter)
 app.use('/api/payMent', PayMentRouter)
 app.use('/api/poster', PostRouter)
+app.use('/api/blog',BlogRouter)
 
 app.use('/test', (req, res, next) => {
     res.send('Test router');
@@ -92,28 +95,6 @@ const storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 })
-const upload = multer({
-    storage: storage
-}).single('testImage')
-app.post('/upload', (req, res) => {
-    upload(req, res, (err) => {
-        if (err) {
-            console.log(err)
-        } else {
-            const newImage = new Imagemodal({
-                name: req.body.name,
-                image: {
-                    data: req.file.filename,
-                    contentType: 'image/png'
-                }
-            })
-            newImage.save()
-                .then(() => res.send('successful uploaded'))
-                .catch(err => console.log(err))
-        }
-    })
-})
-
 // error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development
