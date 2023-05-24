@@ -11,7 +11,7 @@ const getAllBlog = async ()=>{
 const newBlog = async (blog)=>{
     console.log("Blog in Service",blog)
     const newBlog = new Blog(blog);
-    return newBlog
+    return newBlog.save
 }
 module.exports = {
     getAllBlog,
