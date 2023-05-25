@@ -9,6 +9,8 @@ const { db } = require('./config/database');
 const multer = require('multer');
 let customLogger = require('./middleware/DemoLogger');
 let auth = require('./middleware/auth');
+const Image = require('./model/Image');
+const fs = require('fs')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -89,12 +91,6 @@ app.use('/test', (req, res, next) => {
 app.use(function(req, res, next) {
     next(createError(404));
 });
-const storage = multer.diskStorage({
-    destination: 'upload',
-    filename: (req, file, cb) => {
-        cb(null, file.originalname)
-    }
-})
 // error handler
 app.use(function(err, req, res, next) {
     // set locals, only providing error in development

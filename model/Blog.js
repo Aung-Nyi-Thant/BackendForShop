@@ -10,8 +10,7 @@ const BlogSchema = new Schema({
         required:true
     },
     Photo:{
-        data: Buffer,
-        contentType: String
+        type:String
     },
 });
 module.exports = mongoose.model('Blog', BlogSchema)

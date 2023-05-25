@@ -29,7 +29,7 @@ const login = async(userName, password) => {
     if (user) {
         const validPass = await bcrypt.compare(password, user.password);
         if (validPass) {
-            return user;
+            return validPass;
         } else {
             throw Error("Invalid user or password");
         }
