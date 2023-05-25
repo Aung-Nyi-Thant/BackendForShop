@@ -30,10 +30,11 @@ const login = async function(req, res, next) {
         let payload = { id: user._id };
         const token = jwt.sign(payload, config.TOKEN_SECRET);
         let status_code = "200"
-        res.status(200).send({ token, status_code });
+        res.status(200).json({ token, status_code });
     } catch (err) {
+        let status_code = "400"
         console.log(err)
-        res.status(404).send({ message: "Invalid user" });
+        res.status(200).send({ status_code });
     }
 }
 const getUserById = async function(req, res, next) {

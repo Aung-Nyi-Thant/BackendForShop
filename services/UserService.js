@@ -31,10 +31,10 @@ const login = async(userName, password) => {
         if (validPass) {
             return validPass;
         } else {
-            throw Error("Invalid user or password");
+            throw ("Invalid user or password");
         }
     }
-    throw Error("Invalid user or password");;
+    throw ("Invalid user or password");;
 };
 const updateUser = async(UserId, user) => {    
     const newUser = await User.findByIdAndUpdate(UserId, user, { new: true });
