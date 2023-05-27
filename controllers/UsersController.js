@@ -8,14 +8,24 @@ const registerUser = async function(req, res, next) {
     let password = req.body['password'];
     let email = req.body['email'];
     let age = req.body['age'];
+    let status_code = "200"
     let money = req.body['money'];
     let totalMoney = req.body['totalMoney']
     let type = req.body['type_']
+    let User = {
+            "userName":userName,
+            "password":password,
+            "email":email,
+            "age":age,
+            "money":money,
+            "totalMoney":totalMoney,
+            "type_":type
+    }
     try {
         let user = await userService.register(userName, password, email, age, money, totalMoney, type);
         let payload = { id: user._id };
         const token = jwt.sign(payload, config.TOKEN_SECRET);
-        res.status(200).send({ token });
+        res.status(200).json({ User , status_code });
     } catch (err) {
         console.log(err)
         res.status(400).send({ message: "User already existed" });
